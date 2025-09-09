@@ -1,0 +1,80 @@
+﻿<!-- Search Bar (only for first visit or when searching) -->
+<div *ngIf="!(shouldShowFavorites$ | async)" class="mb-6">
+    <app-search-bar placeholder="Search cryptocurrencies..." [loading]="(loading$ | async) ?? false"
+        (search)="onSearch($event)" (clear)="onClearSearch()">
+    </app-search-bar>
+</div>
+
+<!-- Error Message -->
+<div *ngIf="error$ | async as error" class="mb-6">
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-red-600 mr-2">⚠️</span>
+                <span class="text-red-800">{{ error }}</span>
+            </div>
+            <div class="flex space-x-2">
+                <button (click)="onRetry()" class="text-red-600 hover:text-red-800 underline text-sm">
+                    Retry
+                </button>
+                <button (click)="onClearError()" class="text-red-600 hover:text-red-800">
+                    ✕
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Spinner -->
+<div *ngIf="loading$ | async" class="text-center py-8">
+    <div class="loading-spinner mx-auto mb-4"></div>
+    <p class="text-gray-600">Loading cryptocurrencies...</p>
+</div>
+
+<!-- Favorites Display (for returning users) -->
+<div *ngIf="shouldShowFavorites$ | async" class="space-y-6">
+    <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-gray-800">Your Favorites</h2>
+        <div class="text-sm text-gray-500">
+            Auto-refreshes every 30 seconds
+        </div>
+    </div>
+
+    <div class="space-y-4">
+        <app-crypto-card *ngFor="let crypto of favorites$ | async; trackBy: trackByCryptoId" [crypto]="crypto"
+            [isFavorite]="true" [showToggle]="false"></app-crypto-card>
+    </div>
+
+    <!-- No Favorites Message -->
+    <div *ngIf="!(hasFavorites$ | async)" class="text-center py-8">
+        <p class="text-gray-500 mb-4">No favorites yet!</p>
+        <p class="text-gray-400 text-sm">Switch to the Favorites tab to add some cryptocurrencies to track.</p>
+    </div>
+</div>
+
+<!-- Crypto List (for first visit or search results) -->
+<div *ngIf="!(shouldShowFavorites$ | async)" class="space-y-4">
+    <!-- Search Results -->
+    <ng-container *ngIf="(searchResults$ | async)?.length! > 0; else cryptoList">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">Search Results</h3>
+        <app-crypto-card *ngFor="let crypto of searchResults$ | async; trackBy: trackByCryptoId" [crypto]="crypto"
+            [isFavorite]="crypto.isFavorite" [showToggle]="true"
+            (toggleFavorite)="onToggleFavorite($event)"></app-crypto-card>
+    </ng-container>
+
+    <!-- Default Crypto List -->
+    <ng-template #cryptoList>
+        <h3 *ngIf="(cryptos$ | async)?.length! > 0" class="text-lg font-semibold text-gray-700 mb-4">
+            Top Cryptocurrencies
+        </h3>
+        <app-crypto-card *ngFor="let crypto of cryptos$ | async; trackBy: trackByCryptoId" [crypto]="crypto"
+            [isFavorite]="crypto.isFavorite" [showToggle]="true"
+            (toggleFavorite)="onToggleFavorite($event)"></app-crypto-card>
+    </ng-template>
+
+    <!-- No Results Message -->
+    <div *ngIf="!(loading$ | async) && (searchResults$ | async)?.length === 0 && (cryptos$ | async)?.length === 0"
+        class="text-center py-8">
+        <p class="text-gray-500">No cryptocurrencies found.</p>
+    </div>
+</div>

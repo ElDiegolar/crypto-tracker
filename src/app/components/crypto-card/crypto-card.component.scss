@@ -1,0 +1,25 @@
+﻿.crypto-card {
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+button {
+  cursor: pointer;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+img {
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}

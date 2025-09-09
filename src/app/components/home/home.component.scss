@@ -1,0 +1,24 @@
+﻿h2, h3 {
+  color: #1f2937;
+}
+
+.crypto-list {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .crypto-list {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+
+.error-container {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.retry-button {
+  &:hover {
+    text-decoration: underline;
+  }
+}

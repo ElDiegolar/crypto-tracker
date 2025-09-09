@@ -1,0 +1,53 @@
+﻿<div
+    class="bg-white rounded-lg p-4 shadow-sm border border-gray-200 fade-in hover:shadow-md transition-shadow duration-200">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3 flex-1 min-w-0">
+            <!-- Crypto Icon -->
+            <img [src]="cryptoImage" [alt]="crypto.name" class="w-10 h-10 rounded-full flex-shrink-0"
+                (error)="onImageError($event)">
+
+            <!-- Crypto Info -->
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center space-x-2">
+                    <h3 class="font-semibold text-gray-800 truncate">{{ crypto.name }}</h3>
+                    <span class="text-sm text-gray-500 uppercase flex-shrink-0">{{ crypto.symbol }}</span>
+                </div>
+
+                <!-- Price Info (if available) -->
+                <div *ngIf="hasPrice" class="flex items-center space-x-2 mt-1">
+                    <span class="font-bold text-lg text-gray-900">
+                        {{ currentPrice | currency:'USD':'symbol':'1.2-6' }}
+                    </span>
+                    <span [class]="priceChangeClass" class="text-sm font-medium">
+                        {{ priceChangeIcon }} {{ priceChange | number:'1.2-2' }}%
+                    </span>
+                </div>
+
+                <!-- Market Cap Rank (if available) -->
+                <div *ngIf="marketCapRank" class="mt-1">
+                    <span class="text-xs text-gray-500">
+                        Rank #{{ marketCapRank }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center space-x-2 flex-shrink-0">
+            <!-- Toggle Favorite -->
+            <button *ngIf="showToggle" (click)="onToggleFavorite()"
+                class="p-2 rounded-full transition-colors duration-200"
+                [class]="isFavorite ? 'text-yellow-500 hover:text-yellow-600' : 'text-gray-400 hover:text-yellow-500'"
+                [title]="isFavorite ? 'Remove from favorites' : 'Add to favorites'">
+                {{ isFavorite ? '⭐' : '☆' }}
+            </button>
+
+            <!-- Remove Button -->
+            <button *ngIf="showRemove" (click)="onRemove()"
+                class="p-2 rounded-full text-red-500 hover:text-red-600 transition-colors duration-200"
+                title="Remove from favorites">
+                🗑️
+            </button>
+        </div>
+    </div>
+</div>

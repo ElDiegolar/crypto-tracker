@@ -1,0 +1,40 @@
+﻿h1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-button {
+  cursor: pointer;
+  user-select: none;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  &:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #3b82f6;
+    ring-offset: 2px;
+  }
+}
+
+main {
+  min-height: 400px;
+}
+
+footer {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 2rem;
+  margin-top: 3rem;
+  
+  a {
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #2563eb;
+    }
+  }
+}

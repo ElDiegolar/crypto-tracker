@@ -1,0 +1,43 @@
+﻿<div class="container mx-auto px-4 py-6 max-w-4xl min-h-screen">
+  <!-- Header -->
+  <header class="mb-8 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+      🚀 Crypto Tracker
+    </h1>
+    <p class="text-gray-600">Track your favorite cryptocurrencies in real-time</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="mb-8">
+    <div class="flex space-x-2 bg-white rounded-lg p-2 shadow-sm">
+      <button 
+        (click)="switchTab('home')"
+        class="nav-button flex-1 py-3 px-4 rounded-md font-medium transition-all duration-200 flex items-center justify-center space-x-2"
+        [class]="currentTab === 'home' ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500 hover:bg-blue-50'"
+      >
+        <span>🏠</span>
+        <span>Home</span>
+      </button>
+      <button 
+        (click)="switchTab('favorites')"
+        class="nav-button flex-1 py-3 px-4 rounded-md font-medium transition-all duration-200 flex items-center justify-center space-x-2"
+        [class]="currentTab === 'favorites' ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500 hover:bg-blue-50'"
+      >
+        <span>⭐</span>
+        <span>Favorites</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="fade-in">
+    <app-home *ngIf="currentTab === 'home'"></app-home>
+    <app-favorites *ngIf="currentTab === 'favorites'"></app-favorites>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 text-center text-gray-500 text-sm">
+    <p>Data provided by <a href="https://coingecko.com" target="_blank" rel="noopener" class="text-blue-500 hover:underline">CoinGecko API</a></p>
+    <p class="mt-1">Built with Angular & NgRx</p>
+  </footer>
+</div>

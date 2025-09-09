@@ -1,0 +1,33 @@
+﻿h2, h3, h4 {
+  color: #1f2937;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.instructions-card {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  
+  .emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.empty-state {
+  .emoji {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.favorites-count {
+  background: #e5e7eb;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
