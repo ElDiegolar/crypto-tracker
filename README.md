@@ -1,6 +1,6 @@
 ﻿# 🚀 Crypto Tracker
 
-A modern cryptocurrency price tracker built with Angular and NgRx, featuring real-time price updates and personalized favorites management.
+A modern cryptocurrency price tracker built with Angular and NgRx, testing via karma, featuring real-time price updates and personalized favorites management.
 
 ## ✨ Features
 
@@ -12,10 +12,12 @@ A modern cryptocurrency price tracker built with Angular and NgRx, featuring rea
 
 ## 🚀 Quick Start
 
-```bash
+
 npm install
 npm start
-```
+npm test (single test file)  **app.component.spec.ts
+
+
 
 Open http://localhost:4200
 
